@@ -7,27 +7,31 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Proxy vers ton API distante
+// Proxy API
 app.use('/api', createProxyMiddleware({
   target: 'http://41.230.48.11:4800',
   changeOrigin: true,
   pathRewrite: { '^/api': '' }
 }));
 
-// Charge swagger.json
-const swaggerDocument = JSON.parse(fs.readFileSync(path.join(__dirname, 'test.json'), 'utf8'));
+// Chargement swagger.json
+let swaggerDocument;
+try {
+  swaggerDocument = JSON.parse(fs.readFileSync(path.join(__dirname, 'test.json'), 'utf8'));
+  // Mise à jour du serveur proxy
+  swaggerDocument.servers = [{ url: 'https://swaggertelesys.onrender.com/api' }];
+} catch (err) {
+  console.error('Erreur lecture swagger.json :', err);
+  process.exit(1);
+}
 
-// Mets à jour le serveur Swagger pour utiliser ton URL Render avec proxy
-swaggerDocument.servers = [{ url: 'https://swaggertelesys.onrender.com/api' }];
-
-// Swagger UI sur /api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Redirige la racine vers Swagger UI
+// Redirection racine vers /api-docs
 app.get('/', (req, res) => {
-  res.redirect('/api-docs');
+  res.send('Swagger UI placeholder');
 });
 
 app.listen(port, () => {
-  console.log(`Serveur démarré sur http://localhost:${port}`);
+  console.log(`Serveur démarré sur le port ${port}`);
 });
