@@ -5,33 +5,25 @@
     "version": "1.0.12"
   },
   "servers": [
-    {
-      "url": "http://41.230.48.11:4800"
-    }
-  ],
+  {
+    "url": "http://41.230.48.11:4800"
+  }
+],
+
   "components": {
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
-      },
-      "tokenAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization"
       }
     }
   },
+ 
   "paths": {
     "/T6/Authentification": {
       "post": {
         "summary": "Récupérer Token",
         "description": "Retourne un token à partir des informations utilisateur.",
-        "security": [
-          {
-            "tokenAuth": []
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -57,6 +49,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Authentification réussie",
@@ -84,100 +81,6 @@
           },
           "404": {
             "description": "Utilisateur non trouvé"
-          }
-        }
-      }
-    },
-
-    "/T6/Client/{Multi}/{NC}": {
-      "get": {
-        "summary": "Récupérer un client",
-        "description": "Cette méthode récupère un client en fonction du paramètre de chemin `Multi` et `NC`.",
-        "parameters": [
-          {
-            "name": "Multi",
-            "in": "path",
-            "description": "Identifiant de la société",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "NC",
-            "in": "path",
-            "description": "Identifiant du client",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Détails du client trouvé",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "NC": {
-                      "type": "string"
-                    },
-                    "Lib": {
-                      "type": "string"
-                    },
-                    "MF": {
-                      "type": "string"
-                    },
-                    "Adr1": {
-                      "type": "string"
-                    },
-                    "Adr2": {
-                      "type": "string"
-                    },
-                    "Mail": {
-                      "type": "string"
-                    },
-                    "Tel": {
-                      "type": "string"
-                    },
-                    "Activite": {
-                      "type": "string"
-                    },
-                    "Resp": {
-                      "type": "string"
-                    },
-                    "Type": {
-                      "type": "string"
-                    },
-                    "Transporetur": {
-                      "type": "string"
-                    },
-                    "LibTransporteur": {
-                      "type": "string"
-                    },
-                    "PaiementClt": {
-                      "type": "string"
-                    },
-                    "LivraisonClt": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Paramètre manquant ou invalide"
-          },
-          "404": {
-            "description": "client non trouvé"
           }
         }
       }
