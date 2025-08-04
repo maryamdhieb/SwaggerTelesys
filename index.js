@@ -2,9 +2,16 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
 const path = require('path');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use('/api', createProxyMiddleware({
+  target: 'http://41.230.48.11:4800',
+  changeOrigin: true,
+  pathRewrite: { '^/api': '' }
+}));
 
 const swaggerFilePath = path.join(__dirname, 'test.json');
 let swaggerDocument = {};
