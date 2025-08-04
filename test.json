@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "TELESYS API",
+    "version": "1.0.12"
+  },
+  "servers": [
+  {
+    "url": "http://41.230.48.11:4800"
+  }
+],
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+ 
+  "paths": {
+    "/T6/Authentification": {
+      "post": {
+        "summary": "Récupérer Token",
+        "description": "Retourne un token à partir des informations utilisateur.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Utilisateur": {
+                    "type": "string",
+                    "description": "Nom de l'utilisateur"
+                  },
+                  "Login": {
+                    "type": "string",
+                    "description": "Identifiant"
+                  },
+                  "Pass": {
+                    "type": "string",
+                    "description": "Mot de passe"
+                  }
+                },
+                "required": ["Utilisateur", "Login", "Pass"]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authentification réussie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Token": {
+                      "type": "string"
+                    },
+                    "DateExpT": {
+                      "type": "string"
+                    },
+                    "HeureExpT": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Utilisateur non trouvé"
+          }
+        }
+      }
+    }
+
+   
+  }
+}
