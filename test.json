@@ -93,7 +93,7 @@
         }
       }
     },
-    "/T6/Agent/{Multi}": {
+    "/T6/Agent/{Multi}/{Agent}": {
       "get": {
         "summary": "Récupérer un agent",
         "description": "Cette méthode récupère un agent en fonction du paramètre de chemin `multi`.",
@@ -102,6 +102,16 @@
             "name": "Multi",
             "in": "path",
             "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+            
+            {
+            "name": "Agent",
+            "in": "path",
+            "description": "Identifiant de l'agent",
             "required": true,
             "schema": {
               "type": "string"
