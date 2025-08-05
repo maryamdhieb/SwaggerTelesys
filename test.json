@@ -5,28 +5,28 @@
     "version": "1.0.12"
   },
   "servers": [
-  {
-    "url": "http://41.230.48.11:4800"
-  }
-],
+    {
+      "url": "http://41.230.48.11:4800"
+    }
+  ],
 
   "components": {
     "securitySchemes": {
       "bearerAuth1": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT",
-      "description": "Token 1 pour utilisateur normal"
-    },
-    "bearerAuth2": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT",
-      "description": "Token 2 pour administrateur"
-    }
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Token pour l'authentification. "
+      },
+      "bearerAuth2": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Token d’accès pour consommer les API de récupération de données."
+      }
     }
   },
- 
+
   "paths": {
     "/T6/Authentification": {
       "post": {
@@ -109,8 +109,8 @@
               "type": "string"
             }
           },
-            
-            {
+
+          {
             "name": "Agent",
             "in": "path",
             "description": "Identifiant de l'agent",
@@ -247,8 +247,9 @@
         }
       }
     },
-      "/T6/Transporteur/{Multi}": {
+    "/T6/Transporteur/{Multi}": {
       "post": {
+        "tags": ["Transporteur"],
         "summary": "Vérification des transporteurs",
         "description": "Retourne `true` si tous les transporteurs existent, sinon retourne ceux qui sont incorrects.",
         "parameters": [
@@ -322,9 +323,7 @@
                           }
                         }
                       },
-                      "example": [
-                        { "idErp": "0003", "name": "transpInvalide" }
-                      ]
+                      "example": [{ "idErp": "0003", "name": "transpInvalide" }]
                     }
                   ]
                 }
@@ -333,8 +332,8 @@
           }
         }
       }
-      },
-     "/T6/Magasin/{Multi}": {
+    },
+    "/T6/Magasin/{Multi}": {
       "get": {
         "tags": ["Magasin"],
         "summary": "Récupérer le code magasin",
@@ -689,7 +688,7 @@
 
     "/T6/Famille/{Multi}": {
       "get": {
-        "tags": ["Famille"],
+        "tags": ["Famille et SousFamille"],
         "summary": "Récupérer une famille",
         "description": "Cette méthode récupère une famille en fonction du paramètre de chemin `Multi`.",
 
@@ -965,281 +964,288 @@
         }
       }
     },
- "/T6/DevisRecu": {
-  "post": {
-    "tags": ["Devis"],
-    "summary": "Envoyer un devis au ERP",
-    "description": "Cette méthode envoie le devis à ERP.",
-    "requestBody": {
-      "required": true,
-      "content": {
-        "application/json": {
-          "schema": {
-            "type": "object",
-            "properties": {
-              "numDevis": {
-                "type": "string",
-                "description": "Identifiant du devis"
-              },
-              "dateDevis": {
-                "type": "string",
-                "description": "Date du devis (format AAAAMMJJ)"
-              },
-              "NC": {
-                "type": "string",
-                "description": "Code client"
-              },
-              "libNC": {
-                "type": "string",
-                "description": "Nom du client"
-              },
-              "Agent": {
-                "type": "string",
-                "description": "Code de l'agent"
-              },
-              "libAgent": {
-                "type": "string",
-                "description": "Nom de l'agent"
-              },
-              "deliveryAddress": {
-                "type": "string",
-                "description": "Adresse de livraison"
-              },
-              "useDefaultAddress": {
-                "type": "boolean",
-                "description": "Utiliser l'adresse par défaut"
-              },
-              "deliveryMethod": {
-                "type": "string",
-                "description": "Méthode de livraison"
-              },
-              "carrierId": {
-                "type": "string",
-                "description": "Identifiant transporteur"
-              },
-              "agencyId": {
-                "type": "string",
-                "description": "Identifiant agence"
-              },
-              "deliveryDate": {
-                "type": "string",
-                "description": "Date de livraison (format AAAAMMJJHHMMSS)"
-              },
-              "role": {
-                "type": "string",
-                "description": "Rôle utilisateur"
-              },
-              "comment": {
-                "type": "string",
-                "description": "Commentaire du devis"
-              },
-              "products": {
-                "type": "array",
-                "description": "Liste des produits",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "Mg": {
-                      "type": "string",
-                      "description": "Code magasin"
-                    },
-                    "idProduct": {
-                      "type": "string",
-                      "description": "Identifiant produit"
-                    },
-                    "qty": {
-                      "type": "number",
-                      "description": "Quantité demandée"
-                    },
-                    "price": {
-                      "type": "number",
-                      "description": "Prix unitaire"
-                    },
-                    "Re1": {
-                      "type": "number",
-                      "description": "Remise 1"
-                    },
-                    "Re2": {
-                      "type": "number",
-                      "description": "Remise 2 "
-                    }
-                  },
-                  "required": ["Mg", "idProduct", "qty", "price"]
-                }
-              }
-            },
-            "required": ["numDevis", "dateDevis", "NC", "Agent", "deliveryAddress", "products"]
-          }
-        }
-      }
-    },
-    "security": [
-      {
-        "bearerAuth2": []
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Détails devis trouvé",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "NumDevis": {
-                  "type": "string",
-                  "description": "NumDevis dans ERP"
-                },
-                "NumDevisWeb": {
-                  "type": "string",
-                  "description": "NumDevisWeb dans le site"
-                }
-              }
-            }
-          }
-        }
-      },
-      "400": {
-        "description": "Paramètre manquant ou invalide"
-      },
-      "404": {
-        "description": "Devis non trouvé"
-      }
-    }
-  }
-},
-
-
-  "/T6/DevisEnvoie/{Multi}/{NumDevis}": {
-    "get": {
-      "tags": ["Devis"],
-      "summary": "Récupérer le devis",
-      "description": "Cette méthode récupère le devis.",
-      "parameters": [
-        {
-          "name": "Multi",
-          "in": "path",
-          "description": "Identifiant de la société",
+    "/T6/DevisRecu": {
+      "post": {
+        "tags": ["Devis"],
+        "summary": "Envoyer un devis au ERP",
+        "description": "Cette méthode envoie le devis à ERP.",
+        "requestBody": {
           "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-
-        {
-          "name": "NumDevis",
-          "in": "path",
-          "description": "NumDevis dans ERP",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "security": [
-        {
-          "bearerAuth2": []
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Détails du devis trouvé",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "NumDevis": {
+                  "numDevis": {
                     "type": "string",
-                    "description": "Identifiant du devis dans ERP"
+                    "description": "Identifiant du devis"
                   },
-                  "NumDevisWeb": {
+                  "dateDevis": {
                     "type": "string",
-                    "description": "Identifiant du devis dans le site"
-                  },
-                  "DA": {
-                    "type": "string",
-                    "description": "Date de la création du devis"
+                    "description": "Date du devis (format AAAAMMJJ)"
                   },
                   "NC": {
                     "type": "string",
-                    "description": "Identifiant du client"
+                    "description": "Code client"
                   },
-                  "Lib": {
+                  "libNC": {
                     "type": "string",
-                    "description": "libellé du client"
+                    "description": "Nom du client"
                   },
                   "Agent": {
                     "type": "string",
-                    "description": "Identifiant de l'agent"
+                    "description": "Code de l'agent"
                   },
-                  "LibAgent": {
+                  "libAgent": {
                     "type": "string",
-                    "description": "libellé de l'agent"
+                    "description": "Nom de l'agent"
                   },
-                  "Adresse": {
+                  "deliveryAddress": {
                     "type": "string",
-                    "description": "Adresse du client"
+                    "description": "Adresse de livraison"
                   },
-                  "Transporetur": {
+                  "useDefaultAddress": {
+                    "type": "boolean",
+                    "description": "Utiliser l'adresse par défaut"
+                  },
+                  "deliveryMethod": {
                     "type": "string",
-                    "description": "Identifiant du transporteur"
+                    "description": "Méthode de livraison"
                   },
-                  "LibTransporteur": {
+                  "carrierId": {
                     "type": "string",
-                    "description": "libellé de la transporteur"
+                    "description": "Identifiant transporteur"
                   },
-
-                  "AdrLiv": {
+                  "agencyId": {
                     "type": "string",
-                    "description": "Adresse de la livraison"
+                    "description": "Identifiant agence"
                   },
-                  "DelaiDate": {
+                  "deliveryDate": {
                     "type": "string",
-                    "description": "Delai de la livraison"
+                    "description": "Date de livraison (format AAAAMMJJHHMMSS)"
                   },
-                  "DelaiHeure": {
+                  "role": {
                     "type": "string",
-                    "description": "Heure de la livraison"
+                    "description": "Rôle utilisateur"
                   },
-                  "MtHt": {
-                    "type": "number",
-                    "description": "Montant Hors taxe"
-                  },
-                  "MtTTCSansRemise": {
-                    "type": "number",
-                    "description": "Montant TTC sans remise"
-                  },
-                  "Mttc": {
-                    "type": "number",
-                    "description": "Montant TTC"
-                  },
-                  "EtatVente": {
+                  "comment": {
                     "type": "string",
-                    "description": "Statut de vente"
+                    "description": "Commentaire du devis"
                   },
-
-                  "Article": {
+                  "products": {
                     "type": "array",
-                    "description": "Liste des articles ",
+                    "description": "Liste des produits",
                     "items": {
                       "type": "object",
                       "properties": {
                         "Mg": {
                           "type": "string",
-                          "description": "Code Magasin"
+                          "description": "Code magasin"
                         },
-                        "Ref": {
+                        "idProduct": {
                           "type": "string",
-                          "description": "Code Référence"
+                          "description": "Identifiant produit"
                         },
-                        "Desi": {
-                          "type": "string",
-                          "description": "Libellé de l'article "
+                        "qty": {
+                          "type": "number",
+                          "description": "Quantité demandée"
                         },
-                        "Qte": {
-                          "type": "string",
-                          "description": "Quatité demander"
+                        "price": {
+                          "type": "number",
+                          "description": "Prix unitaire"
+                        },
+                        "Re1": {
+                          "type": "number",
+                          "description": "Remise 1"
+                        },
+                        "Re2": {
+                          "type": "number",
+                          "description": "Remise 2 "
+                        }
+                      },
+                      "required": ["Mg", "idProduct", "qty", "price"]
+                    }
+                  }
+                },
+                "required": [
+                  "numDevis",
+                  "dateDevis",
+                  "NC",
+                  "Agent",
+                  "deliveryAddress",
+                  "products"
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails devis trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "NumDevis": {
+                      "type": "string",
+                      "description": "NumDevis dans ERP"
+                    },
+                    "NumDevisWeb": {
+                      "type": "string",
+                      "description": "NumDevisWeb dans le site"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Devis non trouvé"
+          }
+        }
+      }
+    },
+
+    "/T6/DevisEnvoie/{Multi}/{NumDevis}": {
+      "get": {
+        "tags": ["Devis"],
+        "summary": "Récupérer le devis",
+        "description": "Cette méthode récupère le devis.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+
+          {
+            "name": "NumDevis",
+            "in": "path",
+            "description": "NumDevis dans ERP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du devis trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "NumDevis": {
+                      "type": "string",
+                      "description": "Identifiant du devis dans ERP"
+                    },
+                    "NumDevisWeb": {
+                      "type": "string",
+                      "description": "Identifiant du devis dans le site"
+                    },
+                    "DA": {
+                      "type": "string",
+                      "description": "Date de la création du devis"
+                    },
+                    "NC": {
+                      "type": "string",
+                      "description": "Identifiant du client"
+                    },
+                    "Lib": {
+                      "type": "string",
+                      "description": "libellé du client"
+                    },
+                    "Agent": {
+                      "type": "string",
+                      "description": "Identifiant de l'agent"
+                    },
+                    "LibAgent": {
+                      "type": "string",
+                      "description": "libellé de l'agent"
+                    },
+                    "Adresse": {
+                      "type": "string",
+                      "description": "Adresse du client"
+                    },
+                    "Transporetur": {
+                      "type": "string",
+                      "description": "Identifiant du transporteur"
+                    },
+                    "LibTransporteur": {
+                      "type": "string",
+                      "description": "libellé de la transporteur"
+                    },
+
+                    "AdrLiv": {
+                      "type": "string",
+                      "description": "Adresse de la livraison"
+                    },
+                    "DelaiDate": {
+                      "type": "string",
+                      "description": "Delai de la livraison"
+                    },
+                    "DelaiHeure": {
+                      "type": "string",
+                      "description": "Heure de la livraison"
+                    },
+                    "MtHt": {
+                      "type": "number",
+                      "description": "Montant Hors taxe"
+                    },
+                    "MtTTCSansRemise": {
+                      "type": "number",
+                      "description": "Montant TTC sans remise"
+                    },
+                    "Mttc": {
+                      "type": "number",
+                      "description": "Montant TTC"
+                    },
+                    "EtatVente": {
+                      "type": "string",
+                      "description": "Statut de vente"
+                    },
+
+                    "Article": {
+                      "type": "array",
+                      "description": "Liste des articles ",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Mg": {
+                            "type": "string",
+                            "description": "Code Magasin"
+                          },
+                          "Ref": {
+                            "type": "string",
+                            "description": "Code Référence"
+                          },
+                          "Desi": {
+                            "type": "string",
+                            "description": "Libellé de l'article "
+                          },
+                          "Qte": {
+                            "type": "string",
+                            "description": "Quatité demander"
+                          }
                         }
                       }
                     }
@@ -1247,122 +1253,113 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Devis non trouvé"
           }
-        },
-        "400": {
-          "description": "Paramètre manquant ou invalide"
-        },
-        "404": {
-          "description": "Devis non trouvé"
         }
       }
-    }
-  },
-  "/T6/DevisImprime/{Multi}/{NumDevis}": {
-  "get": {
-    "tags": ["Devis"],
-    "summary": "Imprimer un devis",
-    "description": "Cette API retourne un fichier PDF du devis demandé.",
-     "security": [
-        { "bearerAuth2": [] }
-      ],
-    "parameters": [
-     {
-          "name": "Multi",
-          "in": "path",
-          "description": "Identifiant de la société",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-
-        {
-          "name": "NumDevis",
-          "in": "path",
-          "description": "NumDevis dans ERP",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-    ],
-    "responses": {
-      "200": {
-        "description": "Fichier PDF du devis",
-        "content": {
-          "application/pdf": {
+    },
+    "/T6/DevisImprime/{Multi}/{NumDevis}": {
+      "get": {
+        "tags": ["Devis"],
+        "summary": "Imprimer un devis",
+        "description": "Cette API retourne un fichier PDF du devis demandé.",
+        "security": [{ "bearerAuth2": [] }],
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
             "schema": {
-              "type": "string",
-              "format": "binary"
+              "type": "string"
+            }
+          },
+
+          {
+            "name": "NumDevis",
+            "in": "path",
+            "description": "NumDevis dans ERP",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        }
-      },
-      "404": {
-        "description": "Devis non trouvé"
-      }
-    }
-  }
-},
-
-  "/T6/DevisAnnule": {
-    "put": {
-      "tags": ["Devis"],
-      "summary": "Annuler un devis",
-      "description": "Cette méthode permet d'annuler un devis.",
-      "security": [
-        { "bearerAuth2": [] }
-      ],
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "NumDevis": {
+        ],
+        "responses": {
+          "200": {
+            "description": "Fichier PDF du devis",
+            "content": {
+              "application/pdf": {
+                "schema": {
                   "type": "string",
-                  "description": "Identifiant du devis dans ERP",
-                  "example": "20252010000017"
-                },
-                "NumDevisWeb": {
-                  "type": "string",
-                  "description": "Identifiant du devis dans le site",
-                  "example": "DVER7777"
+                  "format": "binary"
                 }
-              },
-              "required": ["NumDevis", "NumDevisWeb"]
+              }
             }
+          },
+          "404": {
+            "description": "Devis non trouvé"
           }
         }
-      },
-      "responses": {
-        "200": {
-          "description": "Etat du devis (annulé ou pas)",
+      }
+    },
+
+    "/T6/DevisAnnule": {
+      "put": {
+        "tags": ["Devis"],
+        "summary": "Annuler un devis",
+        "description": "Cette méthode permet d'annuler un devis.",
+        "security": [{ "bearerAuth2": [] }],
+        "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
-
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "NumDevis": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans ERP",
+                    "example": "20252010000017"
+                  },
+                  "NumDevisWeb": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans le site",
+                    "example": "DVER7777"
+                  }
+                },
+                "required": ["NumDevis", "NumDevisWeb"]
+              }
             }
           }
         },
-        "400": {
-          "description": "Paramètre manquant ou invalide"
-        },
-        "404": {
-          "description": "Devis non trouvé"
+        "responses": {
+          "200": {
+            "description": "Etat du devis (annulé ou pas)",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Devis non trouvé"
+          }
         }
       }
-    }
-  },
-   "/T6/BonCommande": {
+    },
+    "/T6/BonCommande": {
       "put": {
         "tags": ["BonCommande"],
         "summary": "Créer Bon de Commande",
         "description": "Cette API permet de générer un bon de commande à partir d'un devis.",
-         "security": [
-        { "bearerAuth2": [] }
-      ],
+        "security": [{ "bearerAuth2": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -1414,63 +1411,59 @@
           }
         }
       }
-    }
-  },
-  "/T6/BonLivraison/{Multi}/{NumBonCommande}/{NumDevisWeb}": {
-  "get": {
-    "tags": ["BonLivraison"],
-    "summary": "Imprimer un devis",
-    "description": "Cette API retourne un fichier PDF du devis demandé.",
-     "security": [
-        { "bearerAuth2": [] }
-      ],
-    "parameters": [
-      {
-          "name": "Multi",
-          "in": "path",
-          "description": "Identifiant de la société",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-      {
-        "name": "NumBonCommande",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        },
-        "description": "Numéro du BonCommande dans ERP"
-      },
-      {
-        "name": "NumDevisWeb",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        },
-        "description": "Numéro du devis sur le site"
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Fichier PDF du devis",
-        "content": {
-          "application/pdf": {
+    },
+    "/T6/BonLivraison/{Multi}/{NumBonCommande}/{NumDevisWeb}": {
+      "get": {
+        "tags": ["BonLivraison"],
+        "summary": "Imprimer un devis",
+        "description": "Cette API retourne un fichier PDF du devis demandé.",
+        "security": [{ "bearerAuth2": [] }],
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
             "schema": {
-              "type": "string",
-              "format": "binary"
+              "type": "string"
             }
+          },
+          {
+            "name": "NumBonCommande",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Numéro du BonCommande dans ERP"
+          },
+          {
+            "name": "NumDevisWeb",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Numéro du devis sur le site"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fichier PDF du devis",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Devis non trouvé"
           }
         }
-      },
-      "404": {
-        "description": "Devis non trouvé"
       }
     }
   }
 }
-
-}
-
