@@ -258,8 +258,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "example": "000001"
+              "type": "string"
             }
           }
         ],
@@ -299,6 +298,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Résultat de la vérification",
@@ -978,59 +982,73 @@
                 "properties": {
                   "numDevis": {
                     "type": "string",
-                    "description": "Identifiant du devis"
+                    "description": "Identifiant du devis",
+                    "example": "DVERP0033"
                   },
                   "dateDevis": {
                     "type": "string",
-                    "description": "Date du devis (format AAAAMMJJ)"
+                    "description": "Date de la création du devis",
+                    "example": "20250617"
                   },
                   "NC": {
                     "type": "string",
-                    "description": "Code client"
+                    "description": "Code client",
+                    "example": "00000001"
                   },
                   "libNC": {
                     "type": "string",
-                    "description": "Nom du client"
+                    "description": "Nom du client",
+                    "example": "BUSINESS SOFT"
                   },
                   "Agent": {
                     "type": "string",
-                    "description": "Code de l'agent"
+                    "description": "Code de l'agent",
+                    "example": "000003"
                   },
                   "libAgent": {
                     "type": "string",
-                    "description": "Nom de l'agent"
+                    "description": "Nom de l'agent",
+                    "example": "OMAR REKIK"
                   },
                   "deliveryAddress": {
                     "type": "string",
-                    "description": "Adresse de livraison"
+                    "description": "Adresse de livraison",
+                    "example": "RTE LAFRANE IMMEUBLE SAMIRA PALACE"
                   },
                   "useDefaultAddress": {
                     "type": "boolean",
-                    "description": "Utiliser l'adresse par défaut"
+                    "description": "Utiliser l'adresse par défaut",
+                    "example": true
                   },
                   "deliveryMethod": {
                     "type": "string",
-                    "description": "Méthode de livraison"
+                    "description": "Méthode de livraison",
+                    "example": "1"
                   },
                   "carrierId": {
                     "type": "string",
-                    "description": "Identifiant transporteur"
+                    "description": "Identifiant transporteur",
+                    "example": "0001"
                   },
                   "agencyId": {
                     "type": "string",
-                    "description": "Identifiant agence"
+                    "description": "Identifiant agence",
+                    "example": "001"
                   },
                   "deliveryDate": {
                     "type": "string",
-                    "description": "Date de livraison (format AAAAMMJJHHMMSS)"
+                    "description": "Date de livraison",
+                    "example": "20250620153000"
                   },
                   "role": {
                     "type": "string",
-                    "description": "Rôle utilisateur"
+                    "description": "Rôle utilisateur",
+                    "example": "2"
                   },
                   "comment": {
                     "type": "string",
-                    "description": "Commentaire du devis"
+                    "description": "Commentaire du devis",
+                    "example": "Livraison urgente demandée."
                   },
                   "products": {
                     "type": "array",
@@ -1040,27 +1058,33 @@
                       "properties": {
                         "Mg": {
                           "type": "string",
-                          "description": "Code magasin"
+                          "description": "Code magasin",
+                          "example": "001"
                         },
                         "idProduct": {
                           "type": "string",
-                          "description": "Identifiant produit"
+                          "description": "Identifiant produit",
+                          "example": "10012"
                         },
                         "qty": {
                           "type": "number",
-                          "description": "Quantité demandée"
+                          "description": "Quantité demandée",
+                          "example": 10
                         },
                         "price": {
                           "type": "number",
-                          "description": "Prix unitaire"
+                          "description": "Prix unitaire",
+                          "example": 25.5
                         },
                         "Re1": {
                           "type": "number",
-                          "description": "Remise 1"
+                          "description": "Remise 1",
+                          "example": 5
                         },
                         "Re2": {
                           "type": "number",
-                          "description": "Remise 2 "
+                          "description": "Remise 2",
+                          "example": 10
                         }
                       },
                       "required": ["Mg", "idProduct", "qty", "price"]
@@ -1296,8 +1320,8 @@
             "content": {
               "application/pdf": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "pdf",
+                  "format": "pdf"
                 }
               }
             }
@@ -1309,12 +1333,22 @@
       }
     },
 
-    "/T6/DevisAnnule": {
+    "/T6/DevisAnnule/{Multi}": {
       "put": {
         "tags": ["Devis"],
         "summary": "Annuler un devis",
         "description": "Cette méthode permet d'annuler un devis.",
-        "security": [{ "bearerAuth2": [] }],
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1338,6 +1372,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Etat du devis (annulé ou pas)",
@@ -1392,16 +1431,13 @@
                     "type": "object",
                     "properties": {
                       "NumBCom": {
-                        "type": "string",
-                        "example": "20251010000004"
+                        "type": "string"
                       },
                       "NumDevis": {
-                        "type": "string",
-                        "example": "20252010000033"
+                        "type": "string"
                       },
                       "NumDevisWeb": {
-                        "type": "string",
-                        "example": "DVtelesystest"
+                        "type": "string"
                       }
                     }
                   }
@@ -1415,8 +1451,8 @@
     "/T6/BonLivraison/{Multi}/{NumBonCommande}/{NumDevisWeb}": {
       "get": {
         "tags": ["BonLivraison"],
-        "summary": "Imprimer un devis",
-        "description": "Cette API retourne un fichier PDF du devis demandé.",
+        "summary": "Récupérer les informations du Bon de livraison",
+        "description": "Cette API retourne la statut de vente cu commande web.",
         "security": [{ "bearerAuth2": [] }],
         "parameters": [
           {
@@ -1449,18 +1485,31 @@
         ],
         "responses": {
           "200": {
-            "description": "Fichier PDF du devis",
+            "description": "Bon de livraison généré avec succès",
             "content": {
-              "application/pdf": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "object",
+                  "properties": {
+                    "NumBCom": {
+                      "type": "string"
+                    },
+                    "NumDevisWeb": {
+                      "type": "string"
+                    },
+                    "NumBL": {
+                      "type": "string"
+                    },
+                    "EtatVente": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "404": {
-            "description": "Devis non trouvé"
+            "description": "BL non trouvé"
           }
         }
       }
