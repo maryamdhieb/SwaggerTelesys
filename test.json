@@ -817,8 +817,7 @@
           }
         }
       }
-    }
-  },
+    },
   "/T6/DevisRecu": {
     "post": {
       "summary": "Envoyer un devis au ERP",
@@ -1116,5 +1115,5 @@
       }
     }
   }
-  
+}
 }
