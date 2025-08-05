@@ -30,6 +30,7 @@
   "paths": {
     "/T6/Authentification": {
       "post": {
+        "tags": ["Authentification"],
         "summary": "Récupérer Token",
         "description": "Retourne un token à partir des informations utilisateur.",
         "requestBody": {
