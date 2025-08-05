@@ -150,6 +150,971 @@
           }
         }
       }
+    },
+    "/T6/Client/{Multi}/{NC}": {
+      "get": {
+        "summary": "Récupérer un client",
+        "description": "Cette méthode récupère un client en fonction du paramètre de chemin `Multi` et `NC`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "NC",
+            "in": "path",
+            "description": "Identifiant du client",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du client trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "NC": {
+                      "type": "string"
+                    },
+                    "Lib": {
+                      "type": "string"
+                    },
+                    "MF": {
+                      "type": "string"
+                    },
+                    "Adr1": {
+                      "type": "string"
+                    },
+                    "Adr2": {
+                      "type": "string"
+                    },
+                    "Mail": {
+                      "type": "string"
+                    },
+                    "Tel": {
+                      "type": "string"
+                    },
+                    "Activite": {
+                      "type": "string"
+                    },
+                    "Resp": {
+                      "type": "string"
+                    },
+                    "Type": {
+                      "type": "string"
+                    },
+                    "Transporetur": {
+                      "type": "string"
+                    },
+                    "LibTransporteur": {
+                      "type": "string"
+                    },
+                    "PaiementClt": {
+                      "type": "string"
+                    },
+                    "LivraisonClt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "client non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/Article/{Multi}/{Mg}/{Ref}": {
+      "get": {
+        "summary": "Récupérer un article",
+        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Mg",
+            "in": "path",
+            "description": "Code Magasin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ref",
+            "in": "path",
+            "description": "Code Référence",
+            "required": false,
+            "value": "*",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails de l'article trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Mg": {
+                      "type": "string"
+                    },
+                    "Ref": {
+                      "type": "string"
+                    },
+                    "Desi": {
+                      "type": "string"
+                    },
+                    "PU": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "PUHT2": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "PUHT3": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "TVA": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "Fa": {
+                      "type": "array",
+                      "description": "Liste des sous-familles",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Fa": {
+                            "type": "string",
+                            "description": "Identifiant de la sous-famille"
+                          },
+                          "LibFa": {
+                            "type": "string",
+                            "description": "Libellé de la sous-famille"
+                          }
+                        }
+                      }
+                    },
+                    "Fa1": {
+                      "type": "array",
+                      "description": "Liste des sous-familles 1",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Fa1": {
+                            "type": "string",
+                            "description": "Identifiant de la sous-famille 1"
+                          },
+                          "LibFa1": {
+                            "type": "string",
+                            "description": "Libellé de la sous-famille 1"
+                          }
+                        }
+                      }
+                    },
+                    "Fa2": {
+                      "type": "array",
+                      "description": "Liste des sous-familles 2",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Fa2": {
+                            "type": "string",
+                            "description": "Identifiant de la sous-famille 2"
+                          },
+                          "LibFa2": {
+                            "type": "string",
+                            "description": "Libellé de la sous-famille 2"
+                          }
+                        }
+                      }
+                    },
+                    "Fa3": {
+                      "type": "array",
+                      "description": "Liste des sous-familles 3",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Fa3": {
+                            "type": "string",
+                            "description": "Identifiant de la sous-famille 3"
+                          },
+                          "LibFa3": {
+                            "type": "string",
+                            "description": "Libellé de la sous-famille 3"
+                          }
+                        }
+                      }
+                    },
+                    "Qt": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "TotalQt": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Article non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/ArticleFichTech/{Multi}/{Mg}/{Ref}": {
+      "get": {
+        "summary": "Récupérer un article du fiche technique",
+        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref` .",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Mg",
+            "in": "path",
+            "description": "Code Magasin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ref",
+            "in": "path",
+            "description": "Code Référence",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails de l'article trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Mg": {
+                      "type": "string"
+                    },
+                    "Ref": {
+                      "type": "string"
+                    },
+                    "FileDoss": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Article non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/ArticleImage/{Multi}/{Mg}/{Ref}": {
+      "get": {
+        "summary": "Récupérer un article image",
+        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref` .",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Mg",
+            "in": "path",
+            "description": "Code Magasin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Ref",
+            "in": "path",
+            "description": "Code Référence",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails de l'article trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Mg": {
+                      "type": "string"
+                    },
+                    "Ref": {
+                      "type": "string"
+                    },
+                    "FileDoss": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Article non trouvé"
+          }
+        }
+      }
+    },
+
+    "/T6/Famille/{Multi}": {
+      "get": {
+        "summary": "Récupérer une famille",
+        "description": "Cette méthode récupère une famille en fonction du paramètre de chemin `Multi`.",
+
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du famille trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Fa": {
+                      "type": "string"
+                    },
+                    "LibFa": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Famille non trouvé"
+          }
+        }
+      }
+    },
+
+    "/T6/SousFamille1/{Multi}": {
+      "get": {
+        "summary": "Récupérer une sous famille 1",
+        "description": "Cette méthode récupère une sous famille 1 en fonction du paramètre de chemin `Multi`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du sous famille 1 trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Fa1": {
+                      "type": "string"
+                    },
+                    "LibFa1": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Sous Famille 1 non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/SousFamille2/{Multi}": {
+      "get": {
+        "summary": "Récupérer une sous famille 2",
+        "description": "Cette méthode récupère une sous famille 2 en fonction du paramètre de chemin `Multi`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du sous famille 2 trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Fa2": {
+                      "type": "string"
+                    },
+                    "LibFa2": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Sous Famille 2 non trouvé"
+          }
+        }
+      }
+    },
+
+    "/T6/SousFamille3/{Multi}": {
+      "get": {
+        "summary": "Récupérer une sous famille 3",
+        "description": "Cette méthode récupère une sous famille 3 en fonction du paramètre de chemin `Multi`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du sous famille 3 trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Fa3": {
+                      "type": "string"
+                    },
+                    "LibFa3": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Sous Famille 3 non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/SousFamille3Detail/{Multi}/{Ref}": {
+      "get": {
+        "summary": "Récupérer une sous famille 3",
+        "description": "Cette méthode récupère une sous famille 3 en fonction du paramètre de chemin `Multi`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+
+          {
+            "name": "Ref",
+            "in": "path",
+            "description": "Code Référence",
+            "required": true,
+            "value": "*",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails du sous famille 3 trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Fa3": {
+                      "type": "string",
+                      "description": "Identifiant de la sous-famille 3"
+                    },
+                    "LibFa3": {
+                      "type": "string",
+                      "description": "Libellé de la sous-famille 3"
+                    },
+                    "Variations": {
+                      "type": "array",
+                      "description": "Liste des variations associées à la sous-famille 3",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Fa": {
+                            "type": "string",
+                            "description": "Identifiant de la variation"
+                          },
+                          "LibFa": {
+                            "type": "string",
+                            "description": "Libellé de la variation"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Sous Famille 3 non trouvé"
+          }
+        }
+      }
+    }
+  },
+  "/T6/DevisRecu": {
+    "post": {
+      "summary": "Envoyer un devis au ERP",
+      "description": "Cette méthode envoie le devis à ERP.",
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Utilisateur": {
+                  "NumDevis": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans ERP"
+                  },
+                  "NumDevisWeb": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans le site"
+                  },
+                  "DA": {
+                    "type": "string",
+                    "description": "Date de la création du devis"
+                  },
+                  "NC": {
+                    "type": "string",
+                    "description": "Identifiant du client"
+                  },
+                  "Lib": {
+                    "type": "string",
+                    "description": "libellé du client"
+                  },
+                  "Agent": {
+                    "type": "string",
+                    "description": "Identifiant de l'agent"
+                  },
+                  "LibAgent": {
+                    "type": "string",
+                    "description": "libellé de l'agent"
+                  },
+                  "Adresse": {
+                    "type": "string",
+                    "description": "Adresse du client"
+                  },
+                  "Transporetur": {
+                    "type": "string",
+                    "description": "Identifiant du transporteur"
+                  },
+                  "LibTransporteur": {
+                    "type": "string",
+                    "description": "libellé de la transporteur"
+                  },
+
+                  "AdrLiv": {
+                    "type": "string",
+                    "description": "Adresse de la livraison"
+                  },
+                  "DelaiDate": {
+                    "type": "string",
+                    "description": "Delai de la livraison"
+                  },
+                  "DelaiHeure": {
+                    "type": "string",
+                    "description": "Heure de la livraison"
+                  },
+                  "MtHt": {
+                    "type": "number",
+                    "description": "Montant Hors taxe"
+                  },
+                  "MtTTCSansRemise": {
+                    "type": "number",
+                    "description": "Montant TTC sans remise"
+                  },
+                  "Mttc": {
+                    "type": "number",
+                    "description": "Montant TTC"
+                  },
+                  "EtatVente": {
+                    "type": "string",
+                    "description": "Statut de vente"
+                  },
+
+                  "Article": {
+                    "type": "array",
+                    "description": "Liste des articles ",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Mg": {
+                          "type": "string",
+                          "description": "Code Magasin"
+                        },
+                        "Ref": {
+                          "type": "string",
+                          "description": "Code Référence"
+                        },
+                        "Desi": {
+                          "type": "string",
+                          "description": "Libellé de l'article "
+                        },
+                        "Qte": {
+                          "type": "string",
+                          "description": "Quatité demander"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["Utilisateur", "Login", "Pass"]
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerAuth2": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Détails du sous famille 3 trouvé",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "NumDevis": {
+                    "type": "string",
+                    "description": "NumDevis dans ERP"
+                  },
+                  "NumDevisWeb": {
+                    "type": "string",
+                    "description": "NumDevisWeb dans le site"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Paramètre manquant ou invalide"
+        },
+        "404": {
+          "description": "Sous Famille 3 non trouvé"
+        }
+      }
+    }
+  },
+
+  "/T6/DevisEnvoie/{Multi}/{NumDevis}": {
+    "get": {
+      "summary": "Récupérer le devis",
+      "description": "Cette méthode récupère le devis.",
+      "parameters": [
+        {
+          "name": "Multi",
+          "in": "path",
+          "description": "Identifiant de la société",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+
+        {
+          "name": "NumDevis",
+          "in": "path",
+          "description": "NumDevis dans ERP",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAuth2": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Détails du devis trouvé",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "NumDevis": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans ERP"
+                  },
+                  "NumDevisWeb": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans le site"
+                  },
+                  "DA": {
+                    "type": "string",
+                    "description": "Date de la création du devis"
+                  },
+                  "NC": {
+                    "type": "string",
+                    "description": "Identifiant du client"
+                  },
+                  "Lib": {
+                    "type": "string",
+                    "description": "libellé du client"
+                  },
+                  "Agent": {
+                    "type": "string",
+                    "description": "Identifiant de l'agent"
+                  },
+                  "LibAgent": {
+                    "type": "string",
+                    "description": "libellé de l'agent"
+                  },
+                  "Adresse": {
+                    "type": "string",
+                    "description": "Adresse du client"
+                  },
+                  "Transporetur": {
+                    "type": "string",
+                    "description": "Identifiant du transporteur"
+                  },
+                  "LibTransporteur": {
+                    "type": "string",
+                    "description": "libellé de la transporteur"
+                  },
+
+                  "AdrLiv": {
+                    "type": "string",
+                    "description": "Adresse de la livraison"
+                  },
+                  "DelaiDate": {
+                    "type": "string",
+                    "description": "Delai de la livraison"
+                  },
+                  "DelaiHeure": {
+                    "type": "string",
+                    "description": "Heure de la livraison"
+                  },
+                  "MtHt": {
+                    "type": "number",
+                    "description": "Montant Hors taxe"
+                  },
+                  "MtTTCSansRemise": {
+                    "type": "number",
+                    "description": "Montant TTC sans remise"
+                  },
+                  "Mttc": {
+                    "type": "number",
+                    "description": "Montant TTC"
+                  },
+                  "EtatVente": {
+                    "type": "string",
+                    "description": "Statut de vente"
+                  },
+
+                  "Article": {
+                    "type": "array",
+                    "description": "Liste des articles ",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Mg": {
+                          "type": "string",
+                          "description": "Code Magasin"
+                        },
+                        "Ref": {
+                          "type": "string",
+                          "description": "Code Référence"
+                        },
+                        "Desi": {
+                          "type": "string",
+                          "description": "Libellé de l'article "
+                        },
+                        "Qte": {
+                          "type": "string",
+                          "description": "Quatité demander"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Paramètre manquant ou invalide"
+        },
+        "404": {
+          "description": "Sous Famille 3 non trouvé"
+        }
+      }
     }
   }
+  
 }
