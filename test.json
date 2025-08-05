@@ -12,10 +12,18 @@
 
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
+      "bearerAuth1": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "description": "Token 1 pour utilisateur normal"
+    },
+    "bearerAuth2": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "description": "Token 2 pour administrateur"
+    }
     }
   },
  
@@ -51,7 +59,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth1": []
           }
         ],
         "responses": {
@@ -81,6 +89,54 @@
           },
           "404": {
             "description": "Utilisateur non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/Agent/{Multi}": {
+      "get": {
+        "summary": "Récupérer un agent",
+        "description": "Cette méthode récupère un agent en fonction du paramètre de chemin `multi`.",
+        "parameters": [
+          {
+            "name": "Multi",
+            "in": "path",
+            "description": "Identifiant de la société",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Détails de l'agent trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Agent": {
+                      "type": "string"
+                    },
+                    "NomAgent": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Agent non trouvé"
           }
         }
       }
