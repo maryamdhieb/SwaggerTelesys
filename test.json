@@ -886,8 +886,8 @@
       }
     },
     "/T6/SousFamille3Detail/{Multi}/{Ref}": {
-      "tags": ["Famille et SousFamille"],
       "get": {
+        "tags": ["Famille et SousFamille"],
         "summary": "Récupérer une sous famille 3",
         "description": "Cette méthode récupère une sous famille 3 en fonction du paramètre de chemin `Multi`.",
         "parameters": [
