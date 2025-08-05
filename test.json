@@ -1318,7 +1318,7 @@
           "200": {
             "description": "Fichier PDF du devis",
             "content": {
-              "application/pdf": {
+              "application/octet-stream": {
                 "schema": {
                   "type": "file"
                 }
