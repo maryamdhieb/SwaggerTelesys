@@ -1320,8 +1320,7 @@
             "content": {
               "application/pdf": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "file"
                 }
               }
             }
