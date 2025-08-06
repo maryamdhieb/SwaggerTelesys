@@ -7,6 +7,11 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Route de ping keep-alive
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 app.use('/api', createProxyMiddleware({
   target: 'http://41.230.48.11:4800',
   changeOrigin: true,
