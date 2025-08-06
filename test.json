@@ -1317,8 +1317,9 @@
         "responses": {
           "200": {
             "description": "Fichier PDF du devis",
+             
             "content": {
-              "application/pdf": {
+              "application/octet-stream": {
                 "schema": {
                   "type": "string",
                   "format" : "binary"
@@ -1336,7 +1337,7 @@
     "/T6/DevisAnnule/{Multi}": {
       "put": {
         "tags": ["Devis"],
-        "summary": "Annuler un devis",
+        "summary": "Annuler un devis(modifier EtatVente en 5)",
         "description": "Cette méthode permet d'annuler un devis.",
         "parameters": [
           {
@@ -1396,7 +1397,7 @@
     "/T6/BonCommande": {
       "put": {
         "tags": ["BonCommande"],
-        "summary": "Créer Bon de Commande",
+        "summary": "Créer Bon de Commande(modifier EtatVente en 4)",
         "description": "Cette API permet de générer un bon de commande à partir d'un devis.",
         "security": [{ "bearerAuth2": [] }],
         "requestBody": {
