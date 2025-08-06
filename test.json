@@ -255,6 +255,7 @@
         "parameters": [
           {
             "name": "Multi",
+            "description": "Identifiant de la société",
             "in": "path",
             "required": true,
             "schema": {
@@ -1319,7 +1320,7 @@
             "description": "Fichier PDF du devis",
              
             "content": {
-              "application/octet-stream": {
+              "application/pdf": {
                 "schema": {
                   "type": "string",
                   "format" : "binary"
