@@ -1434,15 +1434,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "NumDevis": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "type": "string"
+                  
                 }
               }
             }
