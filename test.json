@@ -31,8 +31,8 @@
     "/T6/Authentification": {
       "post": {
         "tags": ["Authentification"],
-        "summary": "Récupérer Token \nhttp://41.230.48.11:4800/T6/Authentification",
-        "description": "Retourne un token à partir des informations utilisateur.",
+        "summary": "Récupérer Token",
+        "description": "Retourne un token à partir des informations utilisateur. \nhttp://41.230.48.11:4800/T6/Authentification",
         "requestBody": {
           "required": true,
           "content": {
@@ -97,8 +97,8 @@
     "/T6/Agent/{Multi}/{Agent}": {
       "get": {
         "tags": ["Agent"],
-        "summary": "Récupérer un agent \nhttp://41.230.48.11:4800/T6/Agent/000001/000002",
-        "description": "Cette méthode récupère un agent en fonction du paramètre de chemin `multi`.",
+        "summary": "Récupérer un agent.",
+        "description": "Cette méthode récupère un agent en fonction du paramètre de chemin `multi`. \nhttp://41.230.48.11:4800/T6/Agent/000001/000002",
         "parameters": [
           {
             "name": "Multi",
@@ -156,8 +156,8 @@
     "/T6/Client/{Multi}/{NC}": {
       "get": {
         "tags": ["Client"],
-        "summary": "Récupérer un client\nhttp://41.230.48.11:4800/T6/Client/000001/00000001",
-        "description": "Cette méthode récupère un client en fonction du paramètre de chemin `Multi` et `NC`.",
+        "summary": "Récupérer un client.",
+        "description": "Cette méthode récupère un client en fonction du paramètre de chemin `Multi` et `NC`. \nhttp://41.230.48.11:4800/T6/Client/000001/00000001",
         "parameters": [
           {
             "name": "Multi",
@@ -250,8 +250,8 @@
     "/T6/Transporteur/{Multi}": {
       "post": {
         "tags": ["Transporteur"],
-        "summary": "Vérification des transporteurs\nhttp://41.230.48.11:4800/T6/Transporteur/000001",
-        "description": "Retourne `true` si tous les transporteurs existent, sinon retourne ceux qui sont incorrects.",
+        "summary": "Vérification des transporteurs.",
+        "description": "Retourne `true` si tous les transporteurs existent, sinon retourne ceux qui sont incorrects.\nhttp://41.230.48.11:4800/T6/Transporteur/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -341,8 +341,8 @@
     "/T6/Magasin/{Multi}": {
       "get": {
         "tags": ["Magasin"],
-        "summary": "Récupérer le code magasin\nhttp://41.230.48.11:4800/T6/Magasin/000001",
-        "description": "Cette méthode récupère le code magasin en fonction du paramètre de chemin `multi`.",
+        "summary": "Récupérer le code magasin.",
+        "description": "Cette méthode récupère le code magasin en fonction du paramètre de chemin `multi`.\nhttp://41.230.48.11:4800/T6/Magasin/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -390,8 +390,8 @@
     "/T6/Article/{Multi}/{Mg}/{Ref}": {
       "get": {
         "tags": ["Article"],
-        "summary": "Récupérer un article\nhttp://41.230.48.11:4800/T6/Article/000001/001/*",
-        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref`.",
+        "summary": "Récupérer un article.",
+        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref`.\nhttp://41.230.48.11:4800/T6/Article/000001/001/*",
         "parameters": [
           {
             "name": "Multi",
@@ -553,8 +553,8 @@
     "/T6/ArticleFichTech/{Multi}/{Mg}/{Ref}": {
       "get": {
         "tags": ["Article"],
-        "summary": "Récupérer un article du fiche technique\nhttp://41.230.48.11:4800/T6/ArticleFichTech/000001/001/*",
-        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref` .",
+        "summary": "Récupérer un article du fiche technique.",
+        "description": "Cette méthode récupère un article en fonction du paramètre de chemin `Multi` , `Mg` et `Ref` .\nhttp://41.230.48.11:4800/T6/ArticleFichTech/000001/001/*",
         "parameters": [
           {
             "name": "Multi",
@@ -694,8 +694,8 @@
     "/T6/Famille/{Multi}": {
       "get": {
         "tags": ["Famille et SousFamille"],
-        "summary": "Récupérer une famille\nhttp://41.230.48.11:4800/T6/Famille/000001",
-        "description": "Cette méthode récupère une famille en fonction du paramètre de chemin `Multi`.",
+        "summary": "Récupérer une famille.",
+        "description": "Cette méthode récupère une famille en fonction du paramètre de chemin `Multi`.\nhttp://41.230.48.11:4800/T6/Famille/000001",
 
         "parameters": [
           {
@@ -745,8 +745,8 @@
     "/T6/SousFamille1/{Multi}": {
       "get": {
         "tags": ["Famille et SousFamille"],
-        "summary": "Récupérer une sous famille 1\nhttp://41.230.48.11:4800/T6/SousFamille1/000001",
-        "description": "Cette méthode récupère une sous famille 1 en fonction du paramètre de chemin `Multi`.",
+        "summary": "Récupérer une sous famille 1.",
+        "description": "Cette méthode récupère une sous famille 1 en fonction du paramètre de chemin `Multi`.\nhttp://41.230.48.11:4800/T6/SousFamille1/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -794,8 +794,8 @@
     "/T6/SousFamille2/{Multi}": {
       "get": {
         "tags": ["Famille et SousFamille"],
-        "summary": "Récupérer une sous famille 2\nhttp://41.230.48.11:4800/T6/SousFamille2/000001",
-        "description": "Cette méthode récupère une sous famille 2 en fonction du paramètre de chemin `Multi`.",
+        "summary": "Récupérer une sous famille 2.",
+        "description": "Cette méthode récupère une sous famille 2 en fonction du paramètre de chemin `Multi`.\nhttp://41.230.48.11:4800/T6/SousFamille2/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -844,8 +844,8 @@
     "/T6/SousFamille3/{Multi}": {
       "get": {
         "tags": ["Famille et SousFamille"],
-        "summary": "Récupérer une sous famille 3\nhttp://41.230.48.11:4800/T6/SousFamille3/000001",
-        "description": "Cette méthode récupère une sous famille 3 en fonction du paramètre de chemin `Multi`.",
+        "summary": "Récupérer une sous famille 3.",
+        "description": "Cette méthode récupère une sous famille 3 en fonction du paramètre de chemin `Multi`.\nhttp://41.230.48.11:4800/T6/SousFamille3/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -893,8 +893,8 @@
     "/T6/SousFamille3Detail/{Multi}/{Ref}": {
       "get": {
         "tags": ["Famille et SousFamille"],
-        "summary": "Récupérer une sous famille 3 Detail\nhttp://41.230.48.11:4800/T6/SousFamille3Detail/000001",
-        "description": "Cette méthode récupère une sous famille 3 Detail en fonction du paramètre de chemin `Multi`.",
+        "summary": "Récupérer une sous famille 3 Detail.",
+        "description": "Cette méthode récupère une sous famille 3 Detail en fonction du paramètre de chemin `Multi`.\nhttp://41.230.48.11:4800/T6/SousFamille3Detail/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -972,8 +972,8 @@
     "/T6/DevisRecu": {
       "post": {
         "tags": ["Devis"],
-        "summary": "Envoyer un devis au ERP\nhttp://41.230.48.11:4800/T6/DevisRecu",
-        "description": "Cette méthode envoie le devis à ERP.",
+        "summary": "Envoyer un devis au ERP.",
+        "description": "Cette méthode envoie le devis à ERP.\nhttp://41.230.48.11:4800/T6/DevisRecu",
         "requestBody": {
           "required": true,
           "content": {
@@ -1143,8 +1143,8 @@
     "/T6/DevisEnvoie/{Multi}/{NumDevis}": {
       "get": {
         "tags": ["Devis"],
-        "summary": "Récupérer le devis\nhttp://41.230.48.11:4800/T6/DevisEnvoie/000001/20252010000001",
-        "description": "Cette méthode récupère le devis.",
+        "summary": "Récupérer le devis.",
+        "description": "Cette méthode récupère le devis.\nhttp://41.230.48.11:4800/T6/DevisEnvoie/000001/20252010000001",
         "parameters": [
           {
             "name": "Multi",
@@ -1291,8 +1291,8 @@
     "/T6/DevisImprime/{Multi}/{NumDevis}": {
       "get": {
         "tags": ["Devis"],
-        "summary": "Imprimer un devis\nhttp://41.230.48.11:4800/T6/DevisImprime/000001/20252010000001",
-        "description": "Cette API retourne un fichier PDF du devis demandé.",
+        "summary": "Imprimer un devis.",
+        "description": "Cette API retourne un fichier PDF du devis demandé.\nhttp://41.230.48.11:4800/T6/DevisImprime/000001/20252010000001",
         "security": [{ "bearerAuth2": [] }],
         "parameters": [
           {
@@ -1338,8 +1338,8 @@
     "/T6/DevisAnnule/{Multi}": {
       "put": {
         "tags": ["Devis"],
-        "summary": "Annuler un devis(modifier EtatVente en 5)\nhttp://41.230.48.11:4800/T6/DevisAnnule/000001",
-        "description": "Cette méthode permet d'annuler un devis.",
+        "summary": "Annuler un devis(modifier EtatVente en 5).",
+        "description": "Cette méthode permet d'annuler un devis.\nhttp://41.230.48.11:4800/T6/DevisAnnule/000001",
         "parameters": [
           {
             "name": "Multi",
@@ -1398,8 +1398,8 @@
     "/T6/DevisVide": {
       "post": {
         "tags": ["Devis"],
-        "summary": "Envoyer un devis vide au ERP\nhttp://41.230.48.11:4800/T6/DevisVide",
-        "description": "Cette méthode permet d'envoyer un devis vide au ERP.",
+        "summary": "Envoyer un devis vide au ERP.",
+        "description": "Cette méthode permet d'envoyer un devis vide au ERP.\nhttp://41.230.48.11:4800/T6/DevisVide",
         "requestBody": {
           "required": true,
           "content": {
@@ -1452,8 +1452,8 @@
     "/T6/BonCommande": {
       "put": {
         "tags": ["BonCommande"],
-        "summary": "Créer Bon de Commande(modifier EtatVente en 4)\nhttp://41.230.48.11:4800/T6/BonCommande",
-        "description": "Cette API permet de générer un bon de commande à partir d'un devis.",
+        "summary": "Créer Bon de Commande(modifier EtatVente en 4).",
+        "description": "Cette API permet de générer un bon de commande à partir d'un devis.\nhttp://41.230.48.11:4800/T6/BonCommande",
         "security": [{ "bearerAuth2": [] }],
         "requestBody": {
           "required": true,
@@ -1507,8 +1507,8 @@
     "/T6/BonLivraison/{Multi}/{NumBonCommande}/{NumDevisWeb}": {
       "get": {
         "tags": ["BonLivraison"],
-        "summary": "Récupérer les informations du Bon de livraison\nhttp://41.230.48.11:4800/T6/BonLivraison/000001/20252010000008/DVERP777896",
-        "description": "Cette API retourne la statut de vente cu commande web.",
+        "summary": "Récupérer les informations du Bon de livraison.",
+        "description": "Cette API retourne la statut de vente cu commande web.\nhttp://41.230.48.11:4800/T6/BonLivraison/000001/20252010000008/DVERP777896",
         "security": [{ "bearerAuth2": [] }],
         "parameters": [
           {
