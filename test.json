@@ -1318,12 +1318,12 @@
         "responses": {
           "200": {
             "description": "Fichier PDF du devis",
-             
+
             "content": {
               "application/pdf": {
                 "schema": {
                   "type": "string",
-                  "format" : "binary"
+                  "format": "binary"
                 }
               }
             }
@@ -1391,6 +1391,67 @@
           },
           "404": {
             "description": "Devis non trouvé"
+          }
+        }
+      }
+    },
+    "/T6/DevisVide": {
+      "post": {
+        "tags": ["Devis"],
+        "summary": "Envoyer un devis vide au ERP",
+        "description": "Cette méthode permet d'envoyer un devis vide au ERP.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "NumDevisWeb": {
+                    "type": "string",
+                    "description": "Identifiant du devis dans le site",
+                    "example": "DVER7777"
+                  },
+                  "NC": {
+                    "type": "string",
+                    "description": "Identifiant du client",
+                    "example": "00000001"
+                  }
+                },
+                "required": ["NumDevisWeb", "NC"]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth2": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NumDevis vide dans ERP",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "NumDevis": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Paramètre manquant ou invalide"
+          },
+          "404": {
+            "description": "Devis vide non trouvé"
           }
         }
       }
